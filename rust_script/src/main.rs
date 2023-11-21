@@ -16,9 +16,7 @@ fn main() {
             thread::spawn(move || {
                 // Run the Shiny app using R with the specific port
                 let mut binding = Command::new(&r_executable_path);
-                let command_r = binding
-                    .arg("-e")
-                    .arg(format!("library(ranacapa); ranacapa::runRanacapaApp(port = {})", port));
+                let command_r = binding.arg("-e").arg("library(ranacapa); ranacapa::runRanacapaApp()");
                 match command_r.status() {
                     Ok(status) if status.success() => {
                         println!("Shiny app started on port {}. Visit http://localhost:{}/ranacapa to access the app.", port, port);
