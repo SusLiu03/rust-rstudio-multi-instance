@@ -9,7 +9,7 @@ fn main() {
     let r_executable_path = "/usr/bin/R";  // Adjust this path based on your actual setup
 
     // Run the Shiny app using R
-    let binding = Command::new(&r_executable_path);
+    let mut binding = Command::new(&r_executable_path);
     let command_r = binding.arg("-e").arg("library(ranacapa); ranacapa::runRanacapaApp()");
     match command_r.status() {
         Ok(status) if status.success() => {
