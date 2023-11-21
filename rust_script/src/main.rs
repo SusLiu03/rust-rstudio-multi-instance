@@ -31,12 +31,11 @@ use std::process::Command;
 use std::thread;
 
 fn main() {
-    // Set the RANACAPA_PORT environmental variable
-    // Specify the path to R executable
-    let r_executable_path = "/usr/bin/R"; // Adjust this path based on your actual setup
+
+    let r_executable_path = "/usr/bin/R"; // R executable path
 
     // Create 10 threads, each with a different port number
-    let threads: Vec<_> = (0..9)
+    let threads: Vec<_> = (0..10)
         .map(|i| {
             let port = 6407 + i;
             
@@ -47,7 +46,7 @@ fn main() {
             let command_r = binding.arg("-e").arg("library(ranacapa); ranacapa::runRanacapaApp()");
             match command_r.status() {
                 Ok(status) if status.success() => {
-                    println!("Shiny app started successfully.");
+                    println!("Shiny app started successfully {}", port);
                 },
                 Ok(status) => eprintln!("Error starting Shiny app: {:?}", status),
                 Err(e) => eprintln!("Error starting Shiny app: {}", e),
