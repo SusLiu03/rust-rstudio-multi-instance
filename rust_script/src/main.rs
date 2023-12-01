@@ -35,13 +35,13 @@ fn main() {
     let r_executable_path = "/usr/bin/R"; // R executable path
 
     // Create 10 threads, each with a different port number
-    let threads: Vec<_> = (0..10)
+    let threads: Vec<_> = (0..20)
         .map(|i| {
-            thread::spawn(move || {
-                // Run the Shiny app using R with the specific port
             let port = 6407 + i;
             
             env::set_var("RANACAPA_PORT", &port.to_string()); // Set your desired port number
+            thread::spawn(move || {
+                // Run the Shiny app using R with the specific port
             let mut binding = Command::new(&r_executable_path);
             let command_r = binding.arg("-e").arg("library(ranacapa); ranacapa::runRanacapaApp()");
             match command_r.status() {
