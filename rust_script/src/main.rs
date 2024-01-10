@@ -35,7 +35,7 @@ fn main() {
     let r_executable_path = "/usr/bin/R"; // R executable path
 
     // Create 20 threads, each with a different port number
-    let threads: Vec<_> = (0..15)
+    let threads: Vec<_> = (0..20)
         .map(|i| {
             let port = 6407 + i;
             
